@@ -1,0 +1,55 @@
+﻿@{
+    string PageUser = "未登入";
+    string IsLogin = "0";
+    string strUserNo = "";
+
+    if (Session["UserNo"] != null)
+    {
+        strUserNo = Session["UserNo"].ToString();
+        if (!string.IsNullOrEmpty(strUserNo)) { IsLogin = "1"; }
+        PageUser = Session["UserNo"].ToString() + " (" + Session["UserName"].ToString() + ")";
+    }
+}
+<table style="width:100%">
+    <tr>
+        <td></td>
+        @*@if (IsLogin == "1")
+            {
+                <td style="width: 100px; text-align: right; white-space: nowrap"><small>@PageUser</small></td>
+            }*@
+        @if (Page.Home == null)
+        {
+            <td style="width: 60px; text-align: right; white-space: nowrap">
+                <small>
+                    <a href="#" data-role="button" data-rel="back" data-mini="true" data-icon="back">返回</a>
+                </small>
+            </td>
+            <td style="width: 60px; text-align: right; white-space: nowrap">
+                <small>
+                    <a href="~/razor/home/home.cshtml" data-role="button" data-mini="true" data-icon="home">首頁</a>
+                </small>
+            </td>
+        }
+        @if (IsLogin == "0" && Page.Name != "帳號登入")
+        {
+            <td style="width: 60px; text-align: right; white-space: nowrap">
+                <small>
+                    <a href="~/razor/home/register.cshtml" data-role="button" data-theme="a" data-inline="true" data-icon="gear">帳號申請</a>
+                </small>
+            </td>
+            <td style="width: 60px; text-align: right; white-space: nowrap">
+                <small>
+                    <a href="~/razor/home/login.cshtml" data-role="button" data-theme="a" data-inline="true" data-icon="gear">帳號登入</a>
+                </small>
+            </td>
+        }
+        @if (IsLogin == "1")
+        {
+            <td style="width: 60px; text-align: right; white-space: nowrap">
+                <small>
+                    <a href="~/razor/home/logout.cshtml" data-role="button" data-theme="a" data-inline="true" data-icon="forward">登出</a>
+                </small>
+            </td>
+        }
+    </tr>
+</table>

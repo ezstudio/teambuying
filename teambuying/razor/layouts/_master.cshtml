@@ -1,0 +1,47 @@
+﻿@{
+    if (Page.Name != "帳號登入")
+    {
+        if (Session["UserNo"] == null || Session["UserNo"].ToString() == "")
+        {
+            Response.Redirect(@"~\mobile\home\login.cshtml");
+            Response.End();
+        }
+    }
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        @RenderPage("~/mobile/layouts/_jQueryMobile.cshtml")
+        <title>@Page.Name</title>
+        @RenderSection("style", false)
+        @RenderSection("script", false)
+    </head>
+    <body style="background-color:#FFFFF0;">
+        <div data-role="page" style="background:url(../../images/razor/background.png); background-size:100% 100%;">
+            <div data-role="header" data-position="fixed" style="margin: 0px; padding: 0px;">
+                @if (Page.Header == null || Page.Header == "")
+            {
+                    @RenderPage("../layouts/_header.cshtml")
+                }
+                else
+                {
+                    @RenderPage(Page.Header)
+                }
+            </div>
+            <div data-role="content" style="margin: 0px; padding: 0px;">
+                @RenderBody()
+            </div>
+            <div data-role="footer" data-position="fixed" style="margin: 0px; padding: 0px;">
+                @if (Page.Footer == null || Page.Footer == "")
+            {
+                    @RenderPage("../layouts/footer/_footer.cshtml")
+                }
+                else
+                {
+                    @RenderPage(Page.Footer)
+                }
+            </div>
+        </div>
+    </body>
+</html>

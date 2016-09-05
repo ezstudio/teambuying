@@ -1,0 +1,8 @@
+﻿@{
+    string PageUser = "";
+    if (Session["UserNo"] != null)
+    {
+        PageUser = "(" + Session["UserNo"].ToString() + Session["UserName"].ToString() + ")";
+    }
+}
+@Page.Name
